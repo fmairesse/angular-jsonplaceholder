@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+
 import { AboutComponent } from './about.component';
-import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [{
@@ -13,8 +13,7 @@ const routes: Routes = [{
 
 @NgModule({
   declarations: [
-    AboutComponent,
-    UserComponent
+    AboutComponent
   ],
   imports: [
     CommonModule,

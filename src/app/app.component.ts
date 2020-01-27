@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { State } from './core/store/state';
+
 
 @Component({
   selector: 'app-root',
@@ -6,4 +11,9 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
+  requesting$: Observable<boolean>
+
+  constructor(store: Store<State>) {
+    this.requesting$ = store.select('requesting')
+  }
 }
