@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
 
-// Model
-import { PostModel } from '../../models/post.model';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from 'app/core/models/user.model';
+import { UsersService } from 'app/core/users.service';
+import { PostModel } from '../../post.model';
+import { PostsService } from '../../posts.service';
 
-// Service
-import { PostsService } from '../../services/posts.service';
-import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-post-display',

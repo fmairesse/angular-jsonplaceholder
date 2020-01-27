@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-// Model
-import { PostModel } from '../../models/post.model';
-// Service
-import { PostsService } from '../../services/posts.service';
+import { PostModel } from '../../post.model';
+import { PostsService } from '../../posts.service';
 
 @Component({
   selector: 'app-post-create',
