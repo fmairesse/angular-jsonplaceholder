@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { delay, map, mergeMap, catchError } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
 
 import { UserModel } from '../models/user.model';
 import { UsersService } from '../users.service';
 import * as actions from './actions';
-import { EMPTY } from 'rxjs';
 
 
 @Injectable()
@@ -15,10 +15,10 @@ export class UsersEffects {
 		ofType(actions.types.users.loading),
 		// delay(1000),
 		mergeMap(() => this.usersService.getUsers()),
-		map((users: UserModel[]) => actions.creators.users.loaded({payload: users})),
+		map((users: UserModel[]) => actions.creators.users.loaded({payload: {status: 'loaded', data: users}})),
 		catchError((e) => {
 			console.log('UsersEffects error', e)
-			return EMPTY
+			return of(actions.creators.users.loaded({payload: {status: 'loadingError', data: []}}))
 		})
 	))
 

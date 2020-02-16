@@ -1,6 +1,14 @@
-<div *ngFor="let user of (users$ | async)">
-	<h2>{{ user.username }}</h2>
-	<small><strong>Name: </strong>{{ user.name }}</small><br>
-	<small><strong>Email: </strong>{{ user.email }}</small><br>
-	<small><strong>Website: </strong>{{ user.website }}</small><br>
- </div>
+<ng-container *ngIf='(usersState$ | async) as usersState'>
+	{{usersState.status}}
+	<div *ngIf="usersState.status === 'loadingError'; else usersOk">
+		Users could not be loaded
+	</div>
+	<ng-template #usersOk>
+		<div *ngFor="let user of usersState.data">
+			<h2>{{ user.username }}</h2>
+			<small><strong>Name: </strong>{{ user.name }}</small><br>
+			<small><strong>Email: </strong>{{ user.email }}</small><br>
+			<small><strong>Website: </strong>{{ user.website }}</small><br>
+		 </div>
+	</ng-template>
+</ng-container>

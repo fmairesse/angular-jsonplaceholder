@@ -3,21 +3,24 @@ import { Action, ActionReducerMap, createReducer, MetaReducer, on, ActionReducer
 import { environment } from 'environments/environment';
 import { UserModel } from '../models/user.model';
 import * as actions from './actions';
-import { State } from './state';
+import { State, UsersState, LoadEntitiesState } from './state';
 
 
 const initialState: State = {
   requesting: false,
-  users: []
+  users: {
+    status: 'notLoaded',
+    data: []
+  }
 }
 
 export const reducers: ActionReducerMap<State> = {
   requesting: createReducer<boolean>(initialState.requesting, on(
       actions.creators.requesting,
       (state: boolean, action: Action & actions.RequestingActionProps) => action.requesting)),
-  users: createReducer<UserModel[]>(initialState.users, on(
+  users: createReducer<UsersState>(initialState.users, on(
     actions.creators.users.loaded,
-    (state: UserModel[], action: Action & actions.LoadArrayReply<UserModel>) => action.payload))
+    (state: UsersState, action: Action & actions.LoadReply<UserModel[]>) => action.payload))
 };
 
 function debug(reducer: ActionReducer<any>): ActionReducer<any> {

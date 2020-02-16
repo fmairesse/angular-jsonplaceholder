@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { UserModel } from 'app/core/models/user.model';
-import { State } from 'app/core/store/state';
+import { State, UsersState } from 'app/core/store/state';
 import * as actions from 'app/core/store/actions';
 
 @Component({
@@ -13,10 +13,10 @@ import * as actions from 'app/core/store/actions';
 })
 export class AboutComponent implements OnInit {
 
-  users$: Observable<UserModel[]>
+  usersState$: Observable<UsersState>
 
   constructor(private readonly store: Store<State>) {
-    this.users$ = store.pipe(select('users'))
+    this.usersState$ = store.pipe(select('users'))
   }
 
   ngOnInit() {
