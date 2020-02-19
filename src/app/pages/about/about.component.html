@@ -1,14 +1,39 @@
-<ng-container *ngIf='(usersState$ | async) as usersState'>
-	{{usersState.status}}
-	<div *ngIf="usersState.status === 'loadingError'; else usersOk">
+<ng-container *ngIf='(data$ | async) as data'>
+	<div *ngIf="data.status === 'loadingError'; else usersOk">
 		Users could not be loaded
 	</div>
 	<ng-template #usersOk>
-		<div *ngFor="let user of usersState.data">
-			<h2>{{ user.username }}</h2>
-			<small><strong>Name: </strong>{{ user.name }}</small><br>
-			<small><strong>Email: </strong>{{ user.email }}</small><br>
-			<small><strong>Website: </strong>{{ user.website }}</small><br>
-		 </div>
+		<ng-container *ngFor="let user of data.users">
+			<h2>{{ user.data.username }}</h2>
+			<div>
+				<div>
+					<p>{{user.data.name}}</p>
+					<p>{{user.data.email}}</p>
+					<p>{{user.data.website}}</p>
+				</div>
+				<form [formGroup]="user.form">
+					<label>
+						<span>Userame:</span>
+						<input type="text" formControlName="username" />
+					</label>
+					<label>
+						<span>Name:</span>
+						<input type="text" formControlName="name" />
+					</label>
+					<label>
+						<span>Email:</span>
+						<input type="email" formControlName="email" />
+					</label>
+					<label>
+						<span>Website:</span>
+						<input type="url" formControlName="website" />
+					</label>
+					<p>
+						<button (click)="deleteUser(user.id)">Delete</button>
+						<button (click)="updateUser(user)">Update</button>
+					</p>
+				</form>
+			</div>
+		</ng-container>
 	</ng-template>
 </ng-container>

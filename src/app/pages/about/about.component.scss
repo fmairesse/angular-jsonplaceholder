@@ -1,0 +1,16 @@
+h2 + div {
+	display: flex;
+	> *:not(:first-child) {
+		margin-left: 1rem;
+	}
+}
+
+label {
+	display: block;
+	> span {
+		font-size: small;
+		font-weight: bold;
+		display: inline-block;
+		width: 5rem;
+	}
+}

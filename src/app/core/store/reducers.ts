@@ -18,9 +18,18 @@ export const reducers: ActionReducerMap<State> = {
   requesting: createReducer<boolean>(initialState.requesting, on(
       actions.creators.requesting,
       (state: boolean, action: Action & actions.RequestingActionProps) => action.requesting)),
-  users: createReducer<UsersState>(initialState.users, on(
-    actions.creators.users.loaded,
-    (state: UsersState, action: Action & actions.LoadReply<UserModel[]>) => action.payload))
+  users: createReducer<UsersState>(initialState.users,
+    on(actions.creators.users.loaded,
+      (state: UsersState, action: Action & actions.LoadReply<UserModel[]>) => action.payload),
+    on(actions.creators.users.deleted,
+      (state: UsersState, action: Action & actions.IdActionsProps) => {
+        return {...state, data: state.data.filter(u => u.id !== action.id)}
+      }),
+    on(actions.creators.users.updated,
+      (state: UsersState, action: Action & actions.UserActionProps) => {
+        return {...state, data: state.data.map(u => u.id === action.user.id ? action.user : u)}
+      })
+  )
 };
 
 function debug(reducer: ActionReducer<any>): ActionReducer<any> {

@@ -24,9 +24,9 @@ export class WebapiService {
 		return `${baseUrl}/${path}`;
 	}
 
-	get<T>(path: string): Observable<T> {
+	private send<T>(sendFn: () => Observable<T>): Observable<T> {
 		this.store.dispatch(actions.creators.requesting({requesting: true}))
-		return this.http.get<T>(this.url(path)).pipe(
+		return sendFn().pipe(
 			// delay(3000),
 			finalize(() => {
 				this.store.dispatch(actions.creators.requesting({requesting: false}))
@@ -34,10 +34,19 @@ export class WebapiService {
 		))
 	}
 
+	get<T>(path: string): Observable<T> {
+		return this.send<T>(() => this.http.get<T>(this.url(path)))
+	}
+
 	post<T>(path: string, body: any): Observable<T> {
-		this.store.dispatch(actions.creators.requesting({requesting: true}))
-		return this.http.post<T>(this.url(path), body, httpOptions).pipe(finalize(() => {
-			this.store.dispatch(actions.creators.requesting({requesting: false}))
-		}))
+		return this.send<T>(() => this.http.post<T>(this.url(path), body, httpOptions))
+	}
+
+	delete(path: string): Observable<void> {
+		return this.send<void>(() => this.http.delete<void>(this.url(path)))
+	}
+
+	put<T>(path: string, body: any): Observable<T> {
+		return this.send<T>(() => this.http.put<T>(this.url(path), body, httpOptions))
 	}
 }
