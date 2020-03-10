@@ -3,7 +3,7 @@
 		Users could not be loaded
 	</div>
 	<ng-template #usersOk>
-		<ng-container *ngFor="let user of data.users">
+		<ng-container *ngFor="let user of data.users; trackBy: trackUsersByFn">
 			<h2>{{ user.data.username }}</h2>
 			<div>
 				<div>

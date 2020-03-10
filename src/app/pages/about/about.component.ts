@@ -79,4 +79,9 @@ export class AboutComponent implements OnInit {
     this.store.dispatch(actions.creators.users.updating({user: newUser}))
   }
 
+  trackUsersByFn(index: number, user: UserDataForm) {
+    console.log('trackB')
+    return user.data.id;
+  }
+
 }
