@@ -68,7 +68,7 @@ export class AboutComponent implements OnInit {
     this.store.dispatch(actions.creators.users.deleting({id}))
   }
 
-  updateUser(user: UserData) {
+  updateUser(user: UserDataForm) {
     const newUser = {
       ...user.data,
       ...['username', 'name', 'email', 'website'].reduce((data: any, propname: string) => {
