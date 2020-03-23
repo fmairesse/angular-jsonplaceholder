@@ -2,12 +2,14 @@
   <div class="card-body">
     <div class="form-group form-inline text-left">
       <label class="mr-4">Title: </label>
-      <input class="form-control col-10" #titlePost/>
+      <input class="form-control col-10" #titlePost />
     </div>
     <div class="form-group">
       <label>Body: </label>
       <textarea class="form-control" #bodyPost></textarea>
     </div>
-    <button class="btn btn-block btn-primary" (click)="addPost({id: 123, userId: 10, title: titlePost.value, body: bodyPost.value}); titlePost.value=''; bodyPost.value=''">Post </button>
+    <button class="btn btn-block btn-primary"
+      (click)="addPost({id: 123, userId: 10, title: titlePost.value, body: bodyPost.value}); titlePost.value=''; bodyPost.value=''">Post
+    </button>
   </div>
 </div>

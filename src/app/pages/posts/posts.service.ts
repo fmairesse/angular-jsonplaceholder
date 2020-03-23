@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { WebapiService } from 'app/core/webapi.service';
 import { PostModel } from './post.model';
 
-const postsPath ='posts';
+const postsPath = 'posts';
 
 @Injectable()
 export class PostsService {
@@ -19,7 +19,7 @@ export class PostsService {
   }
 
   addPost(post: PostModel): Observable<PostModel> {
-    return this.webapi.post<PostModel>(postsPath, post) 
+    return this.webapi.post<PostModel>(postsPath, post)
   }
 
 }

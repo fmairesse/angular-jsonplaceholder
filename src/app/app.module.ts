@@ -10,20 +10,20 @@ import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule
-  ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpClientModule,
+		AppRoutingModule,
+		CoreModule,
+		SharedModule
+	],
+	declarations: [
+		AppComponent,
+		HomeComponent,
+	],
+	bootstrap: [
+		AppComponent
+	]
 })
 export class AppModule { }

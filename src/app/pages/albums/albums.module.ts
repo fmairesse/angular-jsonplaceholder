@@ -6,21 +6,21 @@ import { AlbumsComponent } from './albums.component';
 import { AlbumComponent } from './album/album.component';
 
 const routes: Routes = [{
-  path: '',
-  component: AlbumsComponent
+	path: '',
+	component: AlbumsComponent
 }];
 
 @NgModule({
-  declarations: [
-    AlbumsComponent,
-    AlbumComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+	declarations: [
+		AlbumsComponent,
+		AlbumComponent
+	],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(routes)
+	],
+	exports: [
+		RouterModule
+	]
 })
 export class AlbumsModule { }

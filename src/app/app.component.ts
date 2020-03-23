@@ -6,14 +6,14 @@ import { State } from './core/store/state';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ]
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  requesting$: Observable<boolean>
+	requesting$: Observable<boolean>
 
-  constructor(store: Store<State>) {
-    this.requesting$ = store.select('requesting')
-  }
+	constructor(store: Store<State>) {
+		this.requesting$ = store.select('requesting')
+	}
 }

@@ -33,7 +33,7 @@ export class UsersEffects {
 	private updateUser$ = createEffect(() => this.actions$.pipe(
 		ofType(actions.types.updating),
 		mergeMap((a: Action & actions.UserActionProps) => this.usersService.updateUser(a.user)),
-		map((user: UserModel) => actions.creators.updated({user})),
+		map((user: UserModel) => actions.creators.updated({ user })),
 		catchError(() => EMPTY)
 	))
 

@@ -5,7 +5,7 @@ import { WebapiService } from 'app/core/webapi.service';
 import { AlbumModel } from './album.model';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AlbumsService {
 	constructor(private webapi: WebapiService) {
 		console.log('AlbumsService constructor')

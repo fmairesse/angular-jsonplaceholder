@@ -25,13 +25,13 @@ export class WebapiService {
 	}
 
 	private send<T>(sendFn: () => Observable<T>): Observable<T> {
-		this.store.dispatch(actions.creators.requesting({requesting: true}))
+		this.store.dispatch(actions.creators.requesting({ requesting: true }))
 		return sendFn().pipe(
 			// delay(3000),
 			finalize(() => {
-				this.store.dispatch(actions.creators.requesting({requesting: false}))
+				this.store.dispatch(actions.creators.requesting({ requesting: false }))
 			}
-		))
+			))
 	}
 
 	get<T>(path: string): Observable<T> {
