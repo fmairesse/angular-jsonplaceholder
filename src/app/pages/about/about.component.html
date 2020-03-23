@@ -1,9 +1,12 @@
-<ng-container *ngIf='(data$ | async) as data'>
-	<div *ngIf="data.status === 'loadingError'; else usersOk">
-		Users could not be loaded
+<div *ngIf="loading$ | async; else loaded">
+	Loading users...
+</div>
+<ng-template #loaded>
+	<div *ngIf="(loadingError$ | async) as loadingError; else loadingOk">
+		{{loadingError}}
 	</div>
-	<ng-template #usersOk>
-		<ng-container *ngFor="let user of data.users; trackBy: trackUsersByFn">
+	<ng-template #loadingOk>
+		<ng-container *ngFor="let user of (users$ | async); trackBy: trackUsersByFn">
 			<h2>{{ user.data.username }}</h2>
 			<div>
 				<div>
@@ -36,4 +39,4 @@
 			</div>
 		</ng-container>
 	</ng-template>
-</ng-container>
+</ng-template>

@@ -1,14 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 
-import { UserModel } from 'app/core/models/user.model';
-import { WebapiService } from './webapi.service';
+import { WebapiService } from 'app/core/webapi.service';
+import { UserModel } from './user.model';
 
 const usersPath = 'users'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UsersService {
   constructor(private webapi: WebapiService) { }
 

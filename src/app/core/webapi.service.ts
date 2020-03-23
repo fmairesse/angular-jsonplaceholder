@@ -7,8 +7,8 @@ import { State } from './store/state';
 import * as actions from './store/actions';
 import { delay, finalize } from 'rxjs/operators';
 
-const baseUrl = 'https://jsonplaceholder.typicode.com';
-// const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'https://jsonplaceholder.typicode.com';
+const baseUrl = 'http://localhost:3000';
 const httpOptions = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json; charset=UTF-8',
