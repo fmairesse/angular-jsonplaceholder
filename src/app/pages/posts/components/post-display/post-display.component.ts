@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { UserModel } from 'app/core/models/user.model';
-import { UsersService } from 'app/core/users.service';
 import { PostModel } from '../../post.model';
 import { PostsService } from '../../posts.service';
+import * as actions from '../../store/posts.actions';
+import { State } from '../../store/posts.state';
+import { selectLoadingError, selectLoading, selectAll } from '../../store/posts.selectors';
 
 
 @Component({
@@ -11,38 +14,20 @@ import { PostsService } from '../../posts.service';
 	templateUrl: './post-display.component.html',
 	styleUrls: ['./post-display.component.css']
 })
-export class PostDisplayComponent implements OnInit {
+export class PostDisplayComponent {
+	posts$: Observable<PostModel[]>;
+	loadingError$: Observable<any>;
+	loading$: Observable<boolean>;
 
-	posts: PostModel[];
-	users: UserModel[];
-
-	constructor(
-		private postsService: PostsService,
-		private usersService: UsersService
-	) {
-		this.getPosts()
+	constructor(private postsService: PostsService, store: Store<State>) {
+		store.dispatch(actions.creators.loading())
+		this.loadingError$ = store.select(selectLoadingError)
+		this.loading$ = store.select(selectLoading)
+		this.posts$ = store.select(selectAll)
 	}
 
-	getPosts() {
-		this.postsService.getPosts()
-			.subscribe(posts => { this.posts = posts; this.setUserName() })
-		this.usersService.getUsers()
-			.subscribe(users => { this.users = users; this.setUserName() })
-		console.log(this.posts)
+	trackPostsByFn(index: number, post: PostModel) {
+		return post.id;
 	}
-
-	setUserName() {
-		if (this.posts && this.users) {
-			for (const post of this.posts) {
-				for (const user of this.users) {
-					if (post.userId === user.id) {
-						post.name = user.name
-					}
-				}
-			}
-		}
-	}
-
-	ngOnInit() { }
 
 }

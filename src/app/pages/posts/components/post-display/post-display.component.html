@@ -1,7 +1,17 @@
-<div class="card m-3" *ngFor="let post of posts">
-  <div class="card-body">
-    <h4 class="card-title">{{ post.title | uppercase}}</h4>
-    <small> <strong>Name: </strong> {{ post.name }}</small>
-    <p>{{ post.body }}</p>
-  </div>
+
+<div *ngIf="loading$ | async; else loaded">
+	Loading posts...
 </div>
+<ng-template #loaded>
+	<div *ngIf="(loadingError$ | async) as loadingError; else loadingOk">
+		{{loadingError}}
+	</div>
+	<ng-template #loadingOk>
+		<div class="card m-3" *ngFor="let post of (posts$ | async); trackBy: trackPostsByFn">
+			<div class="card-body">
+				<h4 class="card-title">{{ post.title | uppercase}}</h4>
+				<p>{{ post.body }}</p>
+			</div>
+		</div>
+	</ng-template>
+</ng-template>
