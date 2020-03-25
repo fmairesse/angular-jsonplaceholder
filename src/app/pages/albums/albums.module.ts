@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AlbumsComponent } from './albums.component';
-import { AlbumComponent } from './album/album.component';
+
 
 const routes: Routes = [{
 	path: '',
@@ -12,12 +12,11 @@ const routes: Routes = [{
 
 @NgModule({
 	declarations: [
-		AlbumsComponent,
-		AlbumComponent
+		AlbumsComponent
 	],
 	imports: [
 		CommonModule,
-		RouterModule.forChild(routes)
+		RouterModule.forChild(routes),
 	],
 	exports: [
 		RouterModule

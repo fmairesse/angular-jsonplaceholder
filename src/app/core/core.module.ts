@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { EntityDataModule, DefaultDataServiceConfig } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -8,6 +9,17 @@ import { environment } from 'environments/environment';
 import { metaReducers, reducers } from './store/reducers';
 import { WebapiService } from './webapi.service';
 
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+	delete404OK: false, // Prevent 404 response to validate a DELETE
+	entityHttpResourceUrls: {
+		// because jsonplaceholder API does not handle singular/plural
+		// like ngrx/data
+		Album: {
+			entityResourceUrl: 'api/albums/',
+			collectionResourceUrl: 'api/albums'
+		}
+	}
+}
 
 @NgModule({
 	declarations: [],
@@ -21,10 +33,16 @@ import { WebapiService } from './webapi.service';
 			}
 		}),
 		EffectsModule.forRoot([]),
+		EntityDataModule.forRoot({
+			entityMetadata: {
+				Album: {}
+			}
+		}),
 		!environment.production ? StoreDevtoolsModule.instrument() : []
 	],
 	providers: [
 		WebapiService,
+		{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
 	]
 })
 export class CoreModule {

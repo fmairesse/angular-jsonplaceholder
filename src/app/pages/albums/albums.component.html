@@ -1,1 +1,10 @@
-<app-album></app-album>
+<div *ngIf="!(loaded$ | async); else loaded">
+	Loading albums...
+</div>
+<ng-template #loaded>
+	<div *ngFor="let album of (albums$ | async)">
+		<h2>{{ album.id }}</h2>
+		<p>{{ album.title }}</p>
+		<button (click)="deleteAlbum(album)" type="button">Delete</button>
+	</div>
+</ng-template>
