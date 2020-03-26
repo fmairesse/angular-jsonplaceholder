@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from 'environments/environment';
 import { metaReducers, reducers } from './store/reducers';
+import { CoreEffects } from './store/effects';
 import { WebapiService } from './webapi.service';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
@@ -32,7 +33,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
 				strictActionImmutability: true,
 			}
 		}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([CoreEffects]),
 		EntityDataModule.forRoot({
 			entityMetadata: {
 				Album: {}
