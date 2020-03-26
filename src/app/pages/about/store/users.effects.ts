@@ -11,10 +11,8 @@ import * as actions from './users.actions';
 
 @Injectable()
 export class UsersEffects {
-	// for dispatching multiple actions, see https://stackoverflow.com/q/41701138/287058
 	private loadUsers$ = createEffect(() => this.actions$.pipe(
-		ofType(actions.types.loading),
-		// delay(1000),
+		ofType(actions.creators.loading),
 		mergeMap(() => this.usersService.getUsers()),
 		map((users: UserModel[]) => actions.creators.loadedSuccess({ users })),
 		catchError((e) => {
@@ -24,15 +22,15 @@ export class UsersEffects {
 	))
 
 	private deleteUsers$ = createEffect(() => this.actions$.pipe(
-		ofType(actions.types.deleting),
-		mergeMap((a: Action & actions.IdActionsProps) => this.usersService.deleteUser(a.id).pipe(map(() => a.id))),
+		ofType(actions.creators.deleting),
+		mergeMap(a => this.usersService.deleteUser(a.id).pipe(map(() => a.id))),
 		map((id: number) => actions.creators.deleted({ id })),
 		catchError(() => EMPTY)
 	))
 
 	private updateUser$ = createEffect(() => this.actions$.pipe(
-		ofType(actions.types.updating),
-		mergeMap((a: Action & actions.UserActionProps) => this.usersService.updateUser(a.user)),
+		ofType(actions.creators.updating),
+		mergeMap(a => this.usersService.updateUser(a.user)),
 		map((user: UserModel) => actions.creators.updated({ user })),
 		catchError(() => EMPTY)
 	))

@@ -1,4 +1,4 @@
-import { Action, ActionReducer, ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
+import {  ActionReducer, ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
 
 import { environment } from 'environments/environment';
 import * as actions from './actions';
@@ -11,7 +11,7 @@ const initialState: State = {
 export const reducers: ActionReducerMap<State> = {
 	requesting: createReducer<boolean>(initialState.requesting, on(
 		actions.creators.requesting,
-		(state: boolean, action: Action & actions.RequestingActionProps) => action.requesting))
+		(state: boolean, action) => action.requesting))
 };
 
 function debug(reducer: ActionReducer<any>): ActionReducer<any> {

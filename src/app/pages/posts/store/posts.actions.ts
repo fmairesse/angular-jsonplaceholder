@@ -1,22 +1,16 @@
 import { PostModel } from "../post.model";
 import { createAction, props } from '@ngrx/store';
 
-export const types = {
-	loading:         '[Posts] loading posts',
-	loadedSuccess:   '[Posts] succeeded to load posts',
-	loadedFailure:   '[Posts] failed to load posts',
-	creating:        '[Posts] creating post',
-	createdSuccess: '[Posts] succeeded to create post',
-}
-
-export interface PostActionProps {
-	post: PostModel
-}
 
 export const creators = {
-	loading: createAction(types.loading),
-	loadedSuccess: createAction(types.loadedSuccess, props<{ posts: PostModel[] }>()),
-	loadedFailure: createAction(types.loadedFailure, props<{ error: any }>()),
-	creating: createAction(types.creating, props<{post: PostModel}>()),
-	createdSuccess: createAction(types.createdSuccess, props<{post: PostModel}>())
+	loading: createAction(
+		'[Posts] loading posts'),
+	loadedSuccess: createAction(
+		'[Posts] succeeded to load posts', props<{ posts: PostModel[] }>()),
+	loadedFailure: createAction(
+		'[Posts] failed to load posts', props<{ error: any }>()),
+	creating: createAction(
+		'[Posts] creating post', props<{post: PostModel}>()),
+	createdSuccess: createAction(
+		'[Posts] succeeded to create post', props<{post: PostModel}>())
 }
