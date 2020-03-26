@@ -3,15 +3,14 @@ import {  ActionReducer, ActionReducerMap, createReducer, MetaReducer, on } from
 import { environment } from 'environments/environment';
 import * as actions from './actions';
 import { State } from './state';
+import { routerReducer } from '@ngrx/router-store';
 
-const initialState: State = {
-	requesting: false
-}
 
 export const reducers: ActionReducerMap<State> = {
-	requesting: createReducer<boolean>(initialState.requesting, on(
+	requesting: createReducer<boolean>(false, on(
 		actions.creators.requesting,
-		(state: boolean, action) => action.requesting))
+		(state: boolean, action) => action.requesting)),
+	router: routerReducer
 };
 
 function debug(reducer: ActionReducer<any>): ActionReducer<any> {

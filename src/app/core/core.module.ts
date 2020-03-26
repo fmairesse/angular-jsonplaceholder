@@ -3,6 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { EntityDataModule, DefaultDataServiceConfig } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from 'environments/environment';
@@ -14,7 +15,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
 	delete404OK: false, // Prevent 404 response to validate a DELETE
 	entityHttpResourceUrls: {
 		// because jsonplaceholder API does not handle singular/plural
-		// like ngrx/data
+		// like ngrx/data 
 		Album: {
 			entityResourceUrl: 'api/albums/',
 			collectionResourceUrl: 'api/albums'
@@ -39,6 +40,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
 				Album: {}
 			}
 		}),
+		StoreRouterConnectingModule.forRoot({routerState: RouterState.Minimal}),
 		!environment.production ? StoreDevtoolsModule.instrument() : []
 	],
 	providers: [
