@@ -8,7 +8,7 @@ import { AlbumService } from './album.service';
 	templateUrl: './albums.component.html',
 	styleUrls: ['./albums.component.css']
 })
-export class AlbumsComponent implements OnInit {
+export class AlbumsComponent {
 
 	loaded$: Observable<boolean>;
 	albums$: Observable<AlbumModel[]>;
@@ -16,9 +16,6 @@ export class AlbumsComponent implements OnInit {
 	constructor(private albumService: AlbumService) {
 		this.loaded$ = albumService.loaded$
 		this.albums$ = albumService.entities$
-	}
-
-	ngOnInit() {
 		this.albumService.getAll()
 	}
 

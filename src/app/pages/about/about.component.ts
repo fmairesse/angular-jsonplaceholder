@@ -21,7 +21,7 @@ interface UserDataForm {
 	styleUrls: ['./about.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
 	users$: Observable<Object>
 	loadingError$: Observable<string>
 	loading$: Observable<boolean>
@@ -44,14 +44,7 @@ export class AboutComponent implements OnInit {
 		)
 		this.loading$ = store.select(selectLoading)
 		this.loadingError$ = store.select(selectLoadingError)
-	}
-
-	ngOnInit() {
-		// setTimeout to prevent ExpressionChangedAfterItHasBeenCheckedError
-		// in ngIf of app.component
-		setTimeout(() => {
-			this.store.dispatch(actions.creators.loading())
-		}, 0)
+		this.store.dispatch(actions.creators.loading())
 	}
 
 	deleteUser(id: number) {
